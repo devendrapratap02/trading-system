@@ -1,0 +1,73 @@
+{
+    "users": [
+        {
+            "id": "alice1",
+            "name": "Alice",
+            "phoneNumber": "123-456-7890",
+            "email": "alice@phonepe.com"
+        },
+        {
+            "id": "bob2",
+            "name": "Bob",
+            "phoneNumber": "987-654-3210",
+            "email": "bob@phonepe.com"
+        }
+    ],
+    "orders": [
+        {
+            "orderId": "order1",
+            "userId": "alice1",
+            "type": "buy",
+            "symbol": "RELIANCE",
+            "quantity": 100,
+            "price": 2000,
+            "status": "ACCEPTED",
+            "timestamp": "2024-09-15T12:00:00Z"
+        },
+        {
+            "orderId": "order2",
+            "userId": "bob2",
+            "type": "sell",
+            "symbol": "RELIANCE",
+            "quantity": 50,
+            "price": 2000,
+            "status": "ACCEPTED",
+            "timestamp": "2024-09-15T12:05:00Z"
+        }
+    ],
+    "orderBooks": {
+        "RELIANCE": {
+            "buyOrders": [
+                {
+                    "orderId": "order1",
+                    "userId": "user1",
+                    "type": "buy",
+                    "symbol": "RELIANCE",
+                    "quantity": 100,
+                    "price": 2000,
+                    "status": "ACCEPTED",
+                    "timestamp": "2024-09-15T12:00:00Z"
+                }
+            ],
+            "sellOrders": [
+                {
+                    "orderId": "order2",
+                    "userId": "user2",
+                    "type": "sell",
+                    "symbol": "RELIANCE",
+                    "quantity": 50,
+                    "price": 2000,
+                    "status": "ACCEPTED",
+                    "timestamp": "2024-09-15T12:05:00Z"
+                }
+            ]
+        },
+        "WIPRO": {
+            "buyOrders": [
+            ],
+            "sellOrders": [
+            ]
+        }
+    },
+    "trades": []
+}

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "node src/index.mjs"
   },
   "author": {
-    "name":"Devendra Pratap Singh",
+    "name": "Devendra Pratap Singh",
     "email": "dps.manit@gmail.com"
   },
   "license": "ISC",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/devendrapratap02/trading-system/issues"
   },
-  "homepage": "https://github.com/devendrapratap02/trading-system#readme"
+  "homepage": "https://github.com/devendrapratap02/trading-system#readme",
+  "dependencies": {
+    "nanoid": "^5.0.7"
+  }
 }
