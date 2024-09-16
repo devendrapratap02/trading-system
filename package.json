@@ -1,0 +1,25 @@
+{
+  "name": "trading-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "author": {
+    "name":"Devendra Pratap Singh",
+    "email": "dps.manit@gmail.com"
+  },
+  "license": "ISC",
+  "description": "Trading System Demo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devendrapratap02/trading-system.git"
+  },
+  "keywords": [
+    "trading"
+  ],
+  "bugs": {
+    "url": "https://github.com/devendrapratap02/trading-system/issues"
+  },
+  "homepage": "https://github.com/devendrapratap02/trading-system#readme"
+}
