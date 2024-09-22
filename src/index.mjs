@@ -20,18 +20,21 @@ await tradingSystem.registerUser(user1);
 await tradingSystem.registerUser(user2);
 
 function promptUser() {
-    rl.question('\nEnter command (place, cancel, status, exit): ', async (command) => {
+    rl.question('\nEnter command (place (p), cancel (c), status (s), order-book (ob), exit (e)): ', async (command) => {
         switch (command.toLowerCase()) {
-            case 'place':
+            case 'place': case 'p':
                 await placeOrder();
                 break;
-            case 'cancel':
+            case 'cancel': case 'c':
                 await cancelOrder();
                 break;
-            case 'status':
+            case 'status': case 's':
                 await checkOrderStatus();
                 break;
-            case 'exit':
+            case 'order-book': case 'ob':
+                await checkOrderBook();
+                break;
+            case 'exit': case 'e':
                 rl.close();
                 return;
             default:
@@ -57,11 +60,6 @@ async function placeOrder() {
                 }
 
                 rl.question('Enter stock symbol: ', async (symbol) => {
-                    if (!await isValidSymbol(symbol)) {
-                        console.log('Invalid stock symbol.');
-                        return resolve();
-                    }
-
                     rl.question('Enter quantity: ', async (quantity) => {
                         if (isNaN(quantity) || quantity <= 0) {
                             console.log('Invalid quantity.');
@@ -80,7 +78,7 @@ async function placeOrder() {
                             } catch (error) {
                                 console.error('Error placing order:', error.message);
                             }
-                            resolve(); // Resolve promise to continue
+                            resolve();
                         });
                     });
                 });
@@ -98,12 +96,12 @@ async function cancelOrder() {
             }
 
             try {
-                await tradingSystem.cancelOrder('RELIANCE', orderId); // Assuming symbol is required and known
+                await tradingSystem.cancelOrder('RELIANCE', orderId);
                 console.log('Order canceled.');
             } catch (error) {
                 console.error('Error canceling order:', error.message);
             }
-            resolve(); // Resolve promise to continue
+            resolve();
         });
     });
 }
@@ -117,20 +115,24 @@ async function checkOrderStatus() {
             } else {
                 console.log('Order status:', order);
             }
-            resolve(); // Resolve promise to continue
+            resolve();
         });
     });
 }
 
-// Validation Helpers
+async function checkOrderBook() {
+    return new Promise((resolve) => {
+        rl.question('Enter stock symbol: ', async (symbol) => {
+            const orderBook = await dataStore.getOrderBook(symbol);
+            console.log("Order Book = ", orderBook);
+            resolve();
+        });
+    });
+}
+
 async function isValidUser(userId) {
     const user = await dataStore.getUser(userId);
     return user !== undefined;
-}
-
-async function isValidSymbol(symbol) {
-    const orderBook = await dataStore.getOrderBook(symbol);
-    return orderBook.buyOrders.length > 0 || orderBook.sellOrders.length > 0;
 }
 
 console.log('Trading System CLI');
