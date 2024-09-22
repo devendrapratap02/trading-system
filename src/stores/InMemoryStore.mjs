@@ -1,5 +1,3 @@
-// src/stores/InMemoryStore.mjs
-
 import DataStore from '../services/DataStore.mjs';
 import fs from 'fs';
 import path from 'path';
@@ -15,13 +13,13 @@ export default class InMemoryStore extends DataStore {
         this.orders = new Map();
         this.orderBooks = new Map();
         this.trades = [];
-        this.loadInitialData(); // Call the synchronous load method
+        this.loadInitialData();
     }
 
     loadInitialData() {
         try {
             const dataFile = path.resolve('src/stores/data.json');
-            const rawData = fs.readFileSync(dataFile, 'utf-8'); // Synchronous file read
+            const rawData = fs.readFileSync(dataFile, 'utf-8');
             const data = JSON.parse(rawData);
 
             // Load users
@@ -93,6 +91,14 @@ export default class InMemoryStore extends DataStore {
 
     async saveOrderBook(orderBook) {
         this.orderBooks.set(orderBook.symbol, orderBook);
+    }
+
+    async updateOrderBook(order, buyOrders, sellOrders) {
+        await this.saveOrderBook(order, { buyOrders, sellOrders });
+    }
+
+    async getAllSymbols() {
+        return Array.from(this.orderBooks.keys());
     }
 
     async getTrades() {

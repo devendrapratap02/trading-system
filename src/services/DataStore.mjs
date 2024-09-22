@@ -15,11 +15,19 @@ export default class DataStore {
         throw new Error('Method not implemented.');
     }
 
+    async updateOrderBook(order, buyOrders, sellOrders) {
+        throw new Error('Method not implemented.');
+    }
+
     async getOrderBook(symbol) {
         throw new Error('Method not implemented.');
     }
 
     async saveOrderBook(orderBook) {
+        throw new Error('Method not implemented.');
+    }
+
+    async getAllSymbols() {
         throw new Error('Method not implemented.');
     }
 

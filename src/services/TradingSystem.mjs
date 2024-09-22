@@ -1,11 +1,16 @@
-// src/services/TradingSystem.mjs
-
 import Order from '../models/Order.mjs';
-import Trade from '../models/Trade.mjs';
+import OrderMatcher from './OrderMatcher.mjs';
 
 export default class TradingSystem {
     constructor(dataStore) {
         this.dataStore = dataStore;
+        this.orderMatcher = new OrderMatcher(dataStore);
+
+        this.dataStore.getAllSymbols().then(symbols => {
+            symbols.forEach(symbol => {
+                this._startMatching(symbol);
+            });
+        })
     }
 
     async registerUser(user) {
@@ -51,6 +56,6 @@ export default class TradingSystem {
     }
 
     _startMatching(symbol) {
-        // Implementation for starting the order matching process
+        this.orderMatcher.matchOrders(symbol);
     }
 }

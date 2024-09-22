@@ -1,9 +1,6 @@
-// src/cli.mjs
-
 import readline from 'readline';
 import TradingSystem from './services/TradingSystem.mjs';
 import InMemoryStore from './stores/InMemoryStore.mjs';
-import User from './models/User.mjs';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -12,12 +9,6 @@ const rl = readline.createInterface({
 
 const dataStore = new InMemoryStore();
 const tradingSystem = new TradingSystem(dataStore);
-
-// Preload some users
-const user1 = new User('user1', 'Alice', '123-456-7890', 'alice@example.com');
-const user2 = new User('user2', 'Bob', '987-654-3210', 'bob@example.com');
-await tradingSystem.registerUser(user1);
-await tradingSystem.registerUser(user2);
 
 function promptUser() {
     rl.question('\nEnter command (place (p), cancel (c), status (s), order-book (ob), exit (e)): ', async (command) => {
@@ -60,6 +51,7 @@ async function placeOrder() {
                 }
 
                 rl.question('Enter stock symbol: ', async (symbol) => {
+                    symbol = symbol.toUpperCase();
                     rl.question('Enter quantity: ', async (quantity) => {
                         if (isNaN(quantity) || quantity <= 0) {
                             console.log('Invalid quantity.');

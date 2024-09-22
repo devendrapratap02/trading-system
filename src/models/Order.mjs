@@ -15,7 +15,7 @@ class Order {
     modifyOrder(quantity, price) {
         this.quantity = quantity;
         this.price = price;
-        this.timestamp = new Date();  // Update timestamp on modification
+        this.timestamp = new Date();
     }
 
     cancelOrder() {
